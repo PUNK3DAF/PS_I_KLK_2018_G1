@@ -121,6 +121,7 @@ public class LoginForma extends javax.swing.JFrame {
         } else {
             GlavnaForma gf = new GlavnaForma(inz);
             gf.setVisible(true);
+            this.dispose();
         }
 
     }//GEN-LAST:event_jButtonLoginActionPerformed

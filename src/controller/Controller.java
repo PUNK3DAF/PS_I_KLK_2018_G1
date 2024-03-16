@@ -4,9 +4,12 @@
  */
 package controller;
 
+import base.DBBroker;
 import java.util.ArrayList;
 import java.util.List;
 import model.Inzenjer;
+import model.Lokacija;
+import model.Masina;
 
 /**
  *
@@ -16,6 +19,7 @@ public class Controller {
 
     private static Controller instance;
     private List<Inzenjer> inz;
+    private DBBroker dbb = DBBroker.getInstance();
 
     public static Controller getInstance() {
         if (instance == null) {
@@ -54,6 +58,22 @@ public class Controller {
         }
 
         return null;
+    }
+
+    public List<Masina> vratiListuMasina() {
+        return dbb.vratiListuMasina();
+    }
+
+    public List<Lokacija> vratuListuLokacija() {
+        return dbb.vratiListuLokacija();
+    }
+
+    public void dodajMasinu(Masina m) {
+        dbb.dodajMasinu(m);
+    }
+
+    public boolean proveriLok(Lokacija lok) {
+        return dbb.proveriLok(lok);
     }
 
 }
