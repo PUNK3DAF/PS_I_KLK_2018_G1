@@ -8,17 +8,18 @@ import controller.Controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import model.Alat;
+import model.Inzenjer;
 import model.Lokacija;
 import model.Masina;
 import model.TipMasine;
+import model.Upotreba;
 
 /**
  *
@@ -27,14 +28,16 @@ import model.TipMasine;
 public class MasinaForma extends javax.swing.JDialog {
 
     private Controller cont = Controller.getInstance();
+    private Inzenjer inz;
 
     /**
      * Creates new form Test
      */
-    public MasinaForma(java.awt.Frame parent, boolean modal) {
+    public MasinaForma(java.awt.Frame parent, boolean modal, Inzenjer inz) {
         super(parent, modal);
         initComponents();
-        popuniComboBox();
+        this.inz = inz;
+        popuni();
     }
 
     /**
@@ -46,6 +49,8 @@ public class MasinaForma extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldDatum = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -56,42 +61,111 @@ public class MasinaForma extends javax.swing.JDialog {
         jComboBoxLokacija = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jComboBoxTip = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonSacuvaj = new javax.swing.JButton();
+        jButtonOdustani = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldNaziv = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldRadniVek = new javax.swing.JTextField();
+        jComboBoxAlati = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jButtonDodajAlat = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableUpotreba = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelInzenjer = new javax.swing.JLabel();
+        jButtonObrisiMasinu = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Naziv");
 
+        jTextFieldDatum.setText("2025-11-11");
+
         jLabel2.setText("Godina proizvodnje");
 
+        jTextFieldProizvodjac.setText("asdf");
+
         jLabel3.setText("Datum pocetka");
+
+        jTextFieldGodProiz.setText("2001");
 
         jLabel4.setText("Tip masine");
 
         jLabel5.setText("Lokacija");
 
-        jButton1.setText("DODAJ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSacuvaj.setText("SACUVAJ MASINU");
+        jButtonSacuvaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonSacuvajActionPerformed(evt);
             }
         });
 
-        jButton3.setText("ODUSTANI");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonOdustani.setText("ODUSTANI");
+        jButtonOdustani.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonOdustaniActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Proizvodjac");
 
+        jTextFieldNaziv.setText("asdf");
+
         jLabel7.setText("Radni vek");
+
+        jTextFieldRadniVek.setText("20");
+        jTextFieldRadniVek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldRadniVekActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Alat");
+
+        jButtonDodajAlat.setText("Dodaj alat");
+        jButtonDodajAlat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDodajAlatActionPerformed(evt);
+            }
+        });
+
+        jTableUpotreba.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableUpotreba);
+
+        jLabel9.setText("Korisnik: ");
+
+        jLabelInzenjer.setText("jLabel10");
+
+        jButtonObrisiMasinu.setText("OBRISI MASINU");
+        jButtonObrisiMasinu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonObrisiMasinuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,18 +173,18 @@ public class MasinaForma extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBoxAlati, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldDatum)
                     .addComponent(jTextFieldGodProiz, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                     .addComponent(jTextFieldProizvodjac, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
@@ -118,11 +192,25 @@ public class MasinaForma extends javax.swing.JDialog {
                     .addComponent(jComboBoxTip, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                     .addComponent(jTextFieldRadniVek, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
-                .addGap(60, 60, 60)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonDodajAlat))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel9)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabelInzenjer, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonSacuvaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonOdustani, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonObrisiMasinu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +222,9 @@ public class MasinaForma extends javax.swing.JDialog {
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextFieldProizvodjac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldProizvodjac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabelInzenjer))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -149,25 +239,44 @@ public class MasinaForma extends javax.swing.JDialog {
                     .addComponent(jTextFieldDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxTip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(3, 3, 3)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jComboBoxLokacija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBoxAlati, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(jButtonDodajAlat))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(jButtonSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(jButtonObrisiMasinu, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonOdustani, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOdustaniActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonOdustaniActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSacuvajActionPerformed
+        JOptionPane.showMessageDialog(this, "USPESNO DODATE MASINE", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButtonSacuvajActionPerformed
+
+    private void jButtonDodajAlatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDodajAlatActionPerformed
+
         Lokacija lok = (Lokacija) jComboBoxLokacija.getSelectedItem();
         if (!cont.proveriLok(lok)) {
             JOptionPane.showMessageDialog(this, "VEC POSTOJI MASINA OVDE", "IMA MASINA", JOptionPane.ERROR_MESSAGE);
@@ -198,16 +307,41 @@ public class MasinaForma extends javax.swing.JDialog {
 
         Masina m = new Masina(rand.nextInt(9999999), naziv, proizvodjac, radniVek, godProiz, datumPoc, tip, lok);
         cont.dodajMasinu(m);
-        JOptionPane.showMessageDialog(this, "USPESNO SI DODAO", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+        Alat a = (Alat) jComboBoxAlati.getSelectedItem();
+        Upotreba u = new Upotreba(rand.nextInt(9999999), a, m);
+        cont.dodajUpotrebu(u);
+        cont.oduzmiStanje(u.getAlat().getId());
+        popuni();
+    }//GEN-LAST:event_jButtonDodajAlatActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonObrisiMasinuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiMasinuActionPerformed
+        int selekRed = jTableUpotreba.getSelectedRow();
+        if (selekRed == -1) {
+            JOptionPane.showMessageDialog(this, "MORAS DA OZNACIS RED", "OZNACI RED", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        ModelTabeleUpotreba mtu = (ModelTabeleUpotreba) jTableUpotreba.getModel();
+        int id = mtu.getUpotrebe().get(selekRed).getId();
+        int alatId = mtu.getUpotrebe().get(selekRed).getAlat().getId();
+        cont.dodajStanje(alatId);
+        cont.obrisiUpotrebu(id);
+        cont.obrisiMasinu(id);
+        popuni();
+    }//GEN-LAST:event_jButtonObrisiMasinuActionPerformed
+
+    private void jTextFieldRadniVekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRadniVekActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldRadniVekActionPerformed
 
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonDodajAlat;
+    private javax.swing.JButton jButtonObrisiMasinu;
+    private javax.swing.JButton jButtonOdustani;
+    private javax.swing.JButton jButtonSacuvaj;
+    private javax.swing.JComboBox<Alat> jComboBoxAlati;
     private javax.swing.JComboBox<Lokacija> jComboBoxLokacija;
     private javax.swing.JComboBox<TipMasine> jComboBoxTip;
     private javax.swing.JLabel jLabel1;
@@ -217,6 +351,13 @@ public class MasinaForma extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelInzenjer;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableUpotreba;
     private javax.swing.JTextField jTextFieldDatum;
     private javax.swing.JTextField jTextFieldGodProiz;
     private javax.swing.JTextField jTextFieldNaziv;
@@ -224,11 +365,21 @@ public class MasinaForma extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldRadniVek;
     // End of variables declaration//GEN-END:variables
 
-    private void popuniComboBox() {
+    private void popuni() {
+        jLabelInzenjer.setText(inz.toString());
+
+        ModelTabeleUpotreba mta = new ModelTabeleUpotreba();
+        jTableUpotreba.setModel(mta);
+
         List<Lokacija> lokacije = cont.vratuListuLokacija();
 
         for (Lokacija l : lokacije) {
             jComboBoxLokacija.addItem(l);
+        }
+
+        List<Alat> alati = cont.vratiListuAlata();
+        for (Alat a : alati) {
+            jComboBoxAlati.addItem(a);
         }
 
         TipMasine[] tipovi = TipMasine.values();
@@ -237,4 +388,5 @@ public class MasinaForma extends javax.swing.JDialog {
             jComboBoxTip.addItem(t);
         }
     }
+
 }

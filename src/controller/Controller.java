@@ -7,9 +7,11 @@ package controller;
 import base.DBBroker;
 import java.util.ArrayList;
 import java.util.List;
+import model.Alat;
 import model.Inzenjer;
 import model.Lokacija;
 import model.Masina;
+import model.Upotreba;
 
 /**
  *
@@ -74,6 +76,34 @@ public class Controller {
 
     public boolean proveriLok(Lokacija lok) {
         return dbb.proveriLok(lok);
+    }
+
+    public List<Alat> vratiListuAlata() {
+        return dbb.vratiListuAlata();
+    }
+
+    public List<Upotreba> vratiListuUpotreba() {
+        return dbb.vratiListuUpotreba();
+    }
+
+    public void dodajUpotrebu(Upotreba u) {
+        dbb.dodajUpotrebu(u);
+    }
+
+    public void obrisiUpotrebu(int id) {
+        dbb.obrisiUpotrebu(id);
+    }
+
+    public void obrisiMasinu(int id) {
+        dbb.obrisiMasinu(id);
+    }
+
+    public void oduzmiStanje(int stanje) {
+        dbb.oduzmiStanje(stanje);
+    }
+
+    public void dodajStanje(int id) {
+        dbb.dodajStanje(id);
     }
 
 }
